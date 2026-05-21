@@ -1,0 +1,253 @@
+/* =========================================================
+   wirecookies — design tokens
+   Hereda los meta-tokens --wire-* de la familia (wiremodal,
+   wiretoast). El consumidor solo necesita setear
+   data-wire-theme="X" en <html>; todos los elementos quedan
+   visualmente coherentes con modales y toasts.
+   ========================================================= */
+.wc-root {
+    --wc-bg:        var(--wire-bg, #ffffff);
+    --wc-bg-alt:    var(--wire-bg-elevated, #ffffff);
+    --wc-text:      var(--wire-text, #111827);
+    --wc-text-muted:var(--wire-text-muted, #6b7280);
+    --wc-border:    var(--wire-border, #e5e7eb);
+    --wc-accent:    var(--wire-accent, #111827);
+    --wc-radius:    var(--wire-radius, 8px);
+    --wc-shadow:    var(--wire-shadow, 0 6px 20px rgba(0,0,0,0.08));
+    --wc-font:      var(--wire-font, system-ui, sans-serif);
+}
+
+/* =========================================================
+   Botón flotante
+   ========================================================= */
+.wc-floating {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 40;
+    width: 2.75rem;
+    height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wc-bg);
+    color: var(--wc-text-muted);
+    border: 1px solid var(--wc-border);
+    border-radius: var(--wc-radius);
+    box-shadow: var(--wc-shadow);
+    cursor: pointer;
+    transition: color .15s, border-color .15s;
+}
+.wc-floating:hover {
+    color: var(--wc-text);
+    border-color: var(--wc-text);
+}
+.wc-floating-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+/* =========================================================
+   Banner inferior
+   ========================================================= */
+.wc-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: var(--wc-bg);
+    border-top: 1px solid var(--wc-border);
+    box-shadow: 0 -10px 25px -5px rgba(0,0,0,0.1);
+    font-family: var(--wc-font);
+}
+.wc-banner-inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+@media (min-width: 1024px) {
+    .wc-banner-inner {
+        flex-direction: row;
+        align-items: center;
+        padding: 1.5rem;
+    }
+}
+.wc-banner-text { flex: 1; }
+.wc-banner-title {
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: var(--wc-text);
+    margin-bottom: 0.25rem;
+}
+.wc-banner-description {
+    font-size: 0.875rem;
+    color: var(--wc-text-muted);
+    margin: 0;
+}
+.wc-banner-link {
+    color: var(--wc-text);
+    text-decoration: underline;
+}
+.wc-banner-link:hover { text-decoration: none; }
+.wc-banner-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+@media (min-width: 640px) {
+    .wc-banner-actions { flex-direction: row; }
+}
+
+/* =========================================================
+   Botones
+   ========================================================= */
+.wc-btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: var(--wc-font);
+    border-radius: var(--wc-radius);
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+    border: 1px solid transparent;
+}
+.wc-btn-primary {
+    background: var(--wc-accent);
+    color: #ffffff;
+}
+.wc-btn-primary:hover { filter: brightness(0.9); }
+
+.wc-btn-secondary {
+    background: var(--wc-bg);
+    color: var(--wc-text-muted);
+    border-color: var(--wc-border);
+}
+.wc-btn-secondary:hover {
+    color: var(--wc-text);
+    border-color: var(--wc-text);
+}
+
+.wc-btn-muted {
+    background: var(--wc-border);
+    color: var(--wc-text);
+}
+.wc-btn-muted:hover { filter: brightness(0.95); }
+
+/* =========================================================
+   Categorías dentro del modal
+   ========================================================= */
+.wc-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.wc-category {
+    padding: 1rem;
+    border: 1px solid var(--wc-border);
+    border-radius: var(--wc-radius);
+}
+.wc-category-required {
+    background: color-mix(in srgb, var(--wc-border) 30%, var(--wc-bg));
+}
+.wc-category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+.wc-category-label {
+    font-weight: 600;
+    color: var(--wc-text);
+    margin: 0;
+}
+.wc-category-badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.6875rem;
+    font-family: ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wc-text-muted);
+    background: var(--wc-border);
+    border-radius: var(--wc-radius);
+}
+.wc-category-description {
+    font-size: 0.875rem;
+    color: var(--wc-text-muted);
+    margin: 0;
+}
+
+/* =========================================================
+   Toggle iOS-like
+   ========================================================= */
+.wc-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+.wc-toggle-input {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+.wc-toggle-track {
+    width: 2.75rem;
+    height: 1.5rem;
+    background: var(--wc-border);
+    border-radius: 9999px;
+    position: relative;
+    transition: background .2s;
+}
+.wc-toggle-track::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: #ffffff;
+    border-radius: 9999px;
+    transition: transform .2s;
+}
+.wc-toggle-input:checked ~ .wc-toggle-track {
+    background: var(--wc-accent);
+}
+.wc-toggle-input:checked ~ .wc-toggle-track::after {
+    transform: translateX(1.25rem);
+}
+
+/* =========================================================
+   Footer del modal
+   ========================================================= */
+.wc-modal-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+@media (min-width: 640px) {
+    .wc-modal-footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.wc-modal-policy-link {
+    font-size: 0.875rem;
+    color: var(--wc-text);
+    text-decoration: underline;
+    align-self: center;
+}
+.wc-modal-policy-link:hover { text-decoration: none; }
+.wc-modal-actions {
+    display: flex;
+    gap: 0.5rem;
+}
