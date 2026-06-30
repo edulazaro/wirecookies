@@ -15,6 +15,7 @@ class WireCookiesServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'wirecookies');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'wirecookies');
 
         // Registramos el componente como `<x-wirecookies />` (sin namespace
         // explícito en la blade del consumidor).
@@ -31,5 +32,9 @@ class WireCookiesServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/css/wirecookies.css' => resource_path('css/vendor/wirecookies.css'),
         ], 'wirecookies-css');
+
+        $this->publishes([
+            __DIR__ . '/../lang' => $this->app->langPath('vendor/wirecookies'),
+        ], 'wirecookies-lang');
     }
 }

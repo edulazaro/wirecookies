@@ -5,8 +5,11 @@ return [
     |--------------------------------------------------------------------------
     | Política de cookies
     |--------------------------------------------------------------------------
-    | URL absoluta o ruta nombrada de la página de política. Se enlaza desde
-    | el banner y el modal. Si es null, no se muestra el enlace.
+    | Enlace a la página de política. Se muestra en el banner y el modal.
+    | Puede ser:
+    |   - string: misma URL para todos los idiomas → '/cookies' o 'https://...'
+    |   - array por locale: ['es' => '/cookies', 'en' => '/en/cookies']
+    | Si es null, no se muestra el enlace.
     */
     'policy_url' => null,
 
@@ -23,32 +26,28 @@ return [
     | Categorías de cookies disponibles
     |--------------------------------------------------------------------------
     | 'essential' siempre va y no es desactivable. El resto son opt-in.
-    | Cada entrada: label + descripción + default activado.
+    | Cada entrada define el COMPORTAMIENTO (required + default). El TEXTO
+    | (label + description) sale de las traducciones:
+    |   lang/{locale}/wirecookies.php → 'categories.{clave}.label|description'
+    | Puedes sobrescribir el texto de una categoría añadiéndole aquí
+    | 'label' / 'description' (tendrán prioridad sobre la traducción).
     */
     'categories' => [
         'essential' => [
-            'label' => 'Cookies esenciales',
-            'description' => 'Necesarias para el funcionamiento básico del sitio: sesión, autenticación y seguridad. No se pueden desactivar.',
             'required' => true,
-            'default' => true,
+            'default'  => true,
         ],
         'analytics' => [
-            'label' => 'Cookies de análisis',
-            'description' => 'Nos ayudan a entender cómo se usa la web y detectar problemas técnicos.',
             'required' => false,
-            'default' => false,
+            'default'  => false,
         ],
         'marketing' => [
-            'label' => 'Cookies de marketing',
-            'description' => 'Permiten medir la eficacia de campañas y mostrar contenido relevante en otras plataformas.',
             'required' => false,
-            'default' => false,
+            'default'  => false,
         ],
         'functional' => [
-            'label' => 'Cookies funcionales',
-            'description' => 'Recuerdan preferencias como idioma o configuración personal.',
             'required' => false,
-            'default' => false,
+            'default'  => false,
         ],
     ],
 

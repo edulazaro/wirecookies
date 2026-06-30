@@ -4,17 +4,19 @@
     'categories' => null,
     'storageKey' => null,
 
-    // Textos
-    'title' => 'Configuración de cookies',
-    'description' => 'Usamos cookies propias y de terceros para analizar el uso de la web y mejorar nuestros servicios. Puedes aceptarlas todas, rechazarlas o configurar tus preferencias.',
-    'acceptAll' => 'Aceptar todo',
-    'rejectAll' => 'Rechazar todo',
-    'configure' => 'Configurar',
-    'savePreferences' => 'Guardar preferencias',
-    'rejectOptional' => 'Rechazar opcionales',
-    'morePolicy' => 'Más información',
-    'modalTitle' => 'Preferencias de cookies',
-    'alwaysActive' => 'Siempre activas',
+    // Textos: null = se resuelven desde las traducciones (wirecookies::wirecookies.*).
+    // Pasar cualquiera de estas props sobrescribe la traducción para ese string.
+    'title' => null,
+    'description' => null,
+    'acceptAll' => null,
+    'rejectAll' => null,
+    'configure' => null,
+    'savePreferences' => null,
+    'rejectOptional' => null,
+    'morePolicy' => null,
+    'viewFullPolicy' => null,
+    'modalTitle' => null,
+    'alwaysActive' => null,
 ])
 
 @php
@@ -22,6 +24,27 @@
     $delay      = $delay      ?? config('wirecookies.delay', 800);
     $categories = $categories ?? config('wirecookies.categories', []);
     $storageKey = $storageKey ?? config('wirecookies.storage_key', 'cookie-preferences');
+
+    // El enlace de política admite un string (igual para todos los idiomas) o
+    // un array por locale (['es' => '/cookies', 'en' => '/en/cookies']).
+    if (is_array($policyUrl)) {
+        $policyUrl = $policyUrl[app()->getLocale()]
+            ?? $policyUrl[config('app.fallback_locale')]
+            ?? (reset($policyUrl) ?: null);
+    }
+
+    // Textos: prop explícita > traducción del paquete.
+    $title           = $title           ?? __('wirecookies::wirecookies.title');
+    $description     = $description     ?? __('wirecookies::wirecookies.description');
+    $acceptAll       = $acceptAll       ?? __('wirecookies::wirecookies.accept_all');
+    $rejectAll       = $rejectAll       ?? __('wirecookies::wirecookies.reject_all');
+    $configure       = $configure       ?? __('wirecookies::wirecookies.configure');
+    $savePreferences = $savePreferences ?? __('wirecookies::wirecookies.save_preferences');
+    $rejectOptional  = $rejectOptional  ?? __('wirecookies::wirecookies.reject_optional');
+    $morePolicy      = $morePolicy      ?? __('wirecookies::wirecookies.more_policy');
+    $viewFullPolicy  = $viewFullPolicy  ?? __('wirecookies::wirecookies.view_full_policy');
+    $modalTitle      = $modalTitle      ?? __('wirecookies::wirecookies.modal_title');
+    $alwaysActive    = $alwaysActive    ?? __('wirecookies::wirecookies.always_active');
 
     // Defaults para localStorage (todas las required = true).
     $defaults = collect($categories)
@@ -138,7 +161,7 @@
                 @foreach($categories as $key => $cat)
                     <div class="wc-category {{ ($cat['required'] ?? false) ? 'wc-category-required' : '' }}">
                         <div class="wc-category-header">
-                            <h3 class="wc-category-label">{{ $cat['label'] }}</h3>
+                            <h3 class="wc-category-label">{{ $cat['label'] ?? __("wirecookies::wirecookies.categories.{$key}.label") }}</h3>
                             @if($cat['required'] ?? false)
                                 <span class="wc-category-badge">{{ $alwaysActive }}</span>
                             @else
@@ -148,7 +171,7 @@
                                 </label>
                             @endif
                         </div>
-                        <p class="wc-category-description">{{ $cat['description'] }}</p>
+                        <p class="wc-category-description">{{ $cat['description'] ?? __("wirecookies::wirecookies.categories.{$key}.description") }}</p>
                     </div>
                 @endforeach
             </div>
@@ -158,7 +181,7 @@
             <div class="wc-modal-footer">
                 @if($policyUrl)
                     <a href="{{ $policyUrl }}" class="wc-modal-policy-link">
-                        Ver política completa
+                        {{ $viewFullPolicy }}
                     </a>
                 @else
                     <span></span>

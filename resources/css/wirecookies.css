@@ -18,7 +18,11 @@
 }
 
 /* =========================================================
-   Botón flotante
+   Botón flotante — vive sobre la PÁGINA, no dentro del modal,
+   así que wiremodal NO lo estiliza: su look se define AQUÍ,
+   explícito y POR TEMA (abajo, sección de temas). Esta base es
+   el default neutro (cuadrado blanco, borde gray-300, icono
+   gray-700, sharp, shadow-lg). Para cambiarlo, pisa .wc-floating.
    ========================================================= */
 .wc-floating {
     position: fixed;
@@ -30,17 +34,17 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--wc-bg);
-    color: var(--wc-text-muted);
-    border: 1px solid var(--wc-border);
-    border-radius: var(--wc-radius);
-    box-shadow: var(--wc-shadow);
+    background: #ffffff;
+    color: #374151;            /* gray-700 */
+    border: 1px solid #d1d5db; /* gray-300 */
+    border-radius: 0;          /* sharp */
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-lg */
     cursor: pointer;
     transition: color .15s, border-color .15s;
 }
 .wc-floating:hover {
-    color: var(--wc-text);
-    border-color: var(--wc-text);
+    color: #111827;            /* gray-900 */
+    border-color: #111827;
 }
 .wc-floating-icon {
     width: 1.25rem;
@@ -56,10 +60,10 @@
     left: 0;
     right: 0;
     z-index: 50;
-    background: var(--wc-bg);
-    border-top: 1px solid var(--wc-border);
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
     box-shadow: 0 -10px 25px -5px rgba(0,0,0,0.1);
-    font-family: var(--wc-font);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 .wc-banner-inner {
     max-width: 80rem;
@@ -80,16 +84,16 @@
 .wc-banner-title {
     font-size: 1.125rem;
     font-weight: 800;
-    color: var(--wc-text);
+    color: #111827;
     margin-bottom: 0.25rem;
 }
 .wc-banner-description {
     font-size: 0.875rem;
-    color: var(--wc-text-muted);
+    color: #4b5563;
     margin: 0;
 }
 .wc-banner-link {
-    color: var(--wc-text);
+    color: #111827;
     text-decoration: underline;
 }
 .wc-banner-link:hover { text-decoration: none; }
@@ -110,31 +114,31 @@
     padding: 0.625rem 1.25rem;
     font-size: 0.875rem;
     font-weight: 600;
-    font-family: var(--wc-font);
-    border-radius: var(--wc-radius);
+    font-family: inherit;
+    border-radius: 0;
     cursor: pointer;
-    transition: background .15s, color .15s, border-color .15s;
+    transition: background .15s, color .15s, border-color .15s, box-shadow .15s, transform .15s;
     border: 1px solid transparent;
 }
 .wc-btn-primary {
-    background: var(--wc-accent);
+    background: #111827;
     color: #ffffff;
 }
 .wc-btn-primary:hover { filter: brightness(0.9); }
 
 .wc-btn-secondary {
-    background: var(--wc-bg);
-    color: var(--wc-text-muted);
-    border-color: var(--wc-border);
+    background: #ffffff;
+    color: #374151;
+    border-color: #d1d5db;
 }
 .wc-btn-secondary:hover {
-    color: var(--wc-text);
-    border-color: var(--wc-text);
+    color: #111827;
+    border-color: #111827;
 }
 
 .wc-btn-muted {
-    background: var(--wc-border);
-    color: var(--wc-text);
+    background: #f3f4f6;
+    color: #374151;
 }
 .wc-btn-muted:hover { filter: brightness(0.95); }
 
@@ -250,4 +254,207 @@
 .wc-modal-actions {
     display: flex;
     gap: 0.5rem;
+}
+
+/* =========================================================
+   Theme overrides — el BOTÓN FLOTANTE y el BANNER (con sus
+   botones) son page-level: wiremodal NO los toca, así que su
+   estilo se define AQUÍ, explícito y POR TEMA (sin --wire-*).
+   Cubre TODOS los temas wire*. Las CATEGORÍAS viven dentro del
+   modal, así que siguen el tema de wiremodal (--wire-*, abajo).
+   ========================================================= */
+
+/* ===== studio: legal SaaS, gris-900, sharp (idéntico a Crowd Legal) ===== */
+[data-wire-theme="studio"] .wc-floating {
+    background: #ffffff; color: #374151; border-color: #d1d5db; border-radius: 0;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+[data-wire-theme="studio"] .wc-floating:hover { color: #111827; border-color: #111827; }
+[data-wire-theme="studio"] .wc-banner { background: #ffffff; border-top: 1px solid #e5e7eb; }
+[data-wire-theme="studio"] .wc-banner,
+[data-wire-theme="studio"] .wc-btn { font-family: "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+[data-wire-theme="studio"] .wc-banner-title { color: #111827; }
+[data-wire-theme="studio"] .wc-banner-description { color: #4b5563; }
+[data-wire-theme="studio"] .wc-banner-link { color: #111827; }
+[data-wire-theme="studio"] .wc-btn { border-radius: 0; }
+[data-wire-theme="studio"] .wc-btn-primary { background: #111827; color: #ffffff; }
+[data-wire-theme="studio"] .wc-btn-secondary { background: #ffffff; color: #374151; border-color: #d1d5db; }
+[data-wire-theme="studio"] .wc-btn-muted { background: #f3f4f6; color: #374151; }
+
+/* ===== chatgpt: neutro limpio, acento verde, redondeado ===== */
+[data-wire-theme="chatgpt"] .wc-floating {
+    background: #ffffff; color: #5d5d5d; border-color: #e5e5e5; border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+[data-wire-theme="chatgpt"] .wc-floating:hover { color: #0d0d0d; border-color: #0d0d0d; }
+[data-wire-theme="chatgpt"] .wc-banner { background: #ffffff; border-top: 1px solid #e5e5e5; box-shadow: 0 -8px 24px -6px rgba(0,0,0,0.08); }
+[data-wire-theme="chatgpt"] .wc-banner-title { color: #0d0d0d; }
+[data-wire-theme="chatgpt"] .wc-banner-description { color: #5d5d5d; }
+[data-wire-theme="chatgpt"] .wc-banner-link { color: #10a37f; }
+[data-wire-theme="chatgpt"] .wc-btn { border-radius: 10px; }
+[data-wire-theme="chatgpt"] .wc-btn-primary { background: #10a37f; color: #ffffff; }
+[data-wire-theme="chatgpt"] .wc-btn-secondary { background: #ffffff; color: #0d0d0d; border-color: #e5e5e5; }
+[data-wire-theme="chatgpt"] .wc-btn-muted { background: #f7f7f8; color: #0d0d0d; }
+
+/* ===== claude: crema cálido, terracota, borde superior de acento ===== */
+[data-wire-theme="claude"] .wc-floating {
+    background: #faf9f5; color: #6b6560; border-color: rgba(26,26,26,0.12); border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(26,26,26,0.08);
+}
+[data-wire-theme="claude"] .wc-floating:hover { color: #1a1a1a; border-color: #1a1a1a; }
+[data-wire-theme="claude"] .wc-banner { background: #faf9f5; border-top: 2px solid #c96442; box-shadow: 0 -8px 24px -6px rgba(26,26,26,0.08); }
+[data-wire-theme="claude"] .wc-banner-title { color: #1a1a1a; }
+[data-wire-theme="claude"] .wc-banner-description { color: #6b6560; }
+[data-wire-theme="claude"] .wc-banner-link { color: #c96442; }
+[data-wire-theme="claude"] .wc-btn { border-radius: 10px; }
+[data-wire-theme="claude"] .wc-btn-primary { background: #c96442; color: #ffffff; }
+[data-wire-theme="claude"] .wc-btn-secondary { background: #faf9f5; color: #1a1a1a; border-color: rgba(26,26,26,0.12); }
+[data-wire-theme="claude"] .wc-btn-muted { background: #efece4; color: #1a1a1a; }
+
+/* ===== minimal: plano, sin sombra, acento sky, sharp ===== */
+[data-wire-theme="minimal"] .wc-floating {
+    background: #ffffff; color: #6b7280; border-color: #e5e7eb; border-radius: 0; box-shadow: none;
+}
+[data-wire-theme="minimal"] .wc-floating:hover { color: #0ea5e9; border-color: #0ea5e9; }
+[data-wire-theme="minimal"] .wc-banner { background: #ffffff; border-top: 1px solid #e5e7eb; box-shadow: none; }
+[data-wire-theme="minimal"] .wc-banner-title { color: #111827; }
+[data-wire-theme="minimal"] .wc-banner-description { color: #6b7280; }
+[data-wire-theme="minimal"] .wc-banner-link { color: #0ea5e9; }
+[data-wire-theme="minimal"] .wc-btn { border-radius: 0; }
+[data-wire-theme="minimal"] .wc-btn-primary { background: #0ea5e9; color: #ffffff; }
+[data-wire-theme="minimal"] .wc-btn-secondary { background: #ffffff; color: #6b7280; border-color: #e5e7eb; }
+[data-wire-theme="minimal"] .wc-btn-secondary:hover { color: #0ea5e9; border-color: #0ea5e9; }
+[data-wire-theme="minimal"] .wc-btn-muted { background: #f3f4f6; color: #374151; }
+
+/* ===== soft: fondo tintado, acento índigo, muy redondeado ===== */
+[data-wire-theme="soft"] .wc-floating {
+    background: #ffffff; color: #64748b; border-color: #e2e8f0; border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(15,23,42,0.06);
+}
+[data-wire-theme="soft"] .wc-floating:hover { color: #1e293b; border-color: #1e293b; }
+[data-wire-theme="soft"] .wc-banner { background: #f8fafc; border-top: 1px solid #e2e8f0; box-shadow: 0 -8px 24px -6px rgba(15,23,42,0.06); }
+[data-wire-theme="soft"] .wc-banner-title { color: #1e293b; }
+[data-wire-theme="soft"] .wc-banner-description { color: #64748b; }
+[data-wire-theme="soft"] .wc-banner-link { color: #6366f1; }
+[data-wire-theme="soft"] .wc-btn { border-radius: 12px; }
+[data-wire-theme="soft"] .wc-btn-primary { background: #6366f1; color: #ffffff; }
+[data-wire-theme="soft"] .wc-btn-secondary { background: #ffffff; color: #475569; border-color: #e2e8f0; }
+[data-wire-theme="soft"] .wc-btn-muted { background: #eef2f7; color: #475569; }
+
+/* ===== megaflow: Flowbite, acento azul, redondeo 8 ===== */
+[data-wire-theme="megaflow"] .wc-floating {
+    background: #ffffff; color: #6b7280; border-color: rgba(0,0,0,0.1); border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+[data-wire-theme="megaflow"] .wc-floating:hover { color: #3b82f6; border-color: #3b82f6; }
+[data-wire-theme="megaflow"] .wc-banner { background: #ffffff; border-top: 1px solid #e5e7eb; box-shadow: 0 -8px 24px -6px rgba(0,0,0,0.08); }
+[data-wire-theme="megaflow"] .wc-banner-title { color: #111827; }
+[data-wire-theme="megaflow"] .wc-banner-description { color: #6b7280; }
+[data-wire-theme="megaflow"] .wc-banner-link { color: #3b82f6; }
+[data-wire-theme="megaflow"] .wc-btn { border-radius: 8px; }
+[data-wire-theme="megaflow"] .wc-btn-primary { background: #3b82f6; color: #ffffff; }
+[data-wire-theme="megaflow"] .wc-btn-secondary { background: #ffffff; color: #374151; border-color: #e5e7eb; }
+[data-wire-theme="megaflow"] .wc-btn-muted { background: #f3f4f6; color: #374151; }
+
+/* ===== brutalist: borde negro grueso + sombra dura desplazada ===== */
+[data-wire-theme="brutalist"] .wc-floating {
+    background: #ffffff; color: #0a0a0a; border: 2px solid #0a0a0a; border-radius: 4px;
+    box-shadow: 4px 4px 0 0 #0a0a0a;
+}
+[data-wire-theme="brutalist"] .wc-floating:hover { color: #0a0a0a; border-color: #0a0a0a; box-shadow: 6px 6px 0 0 #0a0a0a; }
+[data-wire-theme="brutalist"] .wc-banner { background: #ffffff; border-top: 2px solid #0a0a0a; box-shadow: none; }
+[data-wire-theme="brutalist"] .wc-banner-title { color: #0a0a0a; }
+[data-wire-theme="brutalist"] .wc-banner-description { color: #525252; }
+[data-wire-theme="brutalist"] .wc-banner-link { color: #0a0a0a; }
+[data-wire-theme="brutalist"] .wc-btn { border: 2px solid #0a0a0a; border-radius: 4px; box-shadow: 3px 3px 0 0 #0a0a0a; }
+[data-wire-theme="brutalist"] .wc-btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 0 #0a0a0a; }
+[data-wire-theme="brutalist"] .wc-btn-primary { background: #0a0a0a; color: #ffffff; }
+[data-wire-theme="brutalist"] .wc-btn-secondary { background: #ffffff; color: #0a0a0a; }
+[data-wire-theme="brutalist"] .wc-btn-muted { background: #fef08a; color: #0a0a0a; }
+
+/* ===== glass: cristal esmerilado (backdrop blur) ===== */
+[data-wire-theme="glass"] .wc-floating {
+    background: rgba(255,255,255,0.55); color: #0f172a; border: 1px solid rgba(255,255,255,0.5); border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(15,23,42,0.18);
+    backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+[data-wire-theme="glass"] .wc-floating:hover { color: #0f172a; border-color: rgba(15,23,42,0.3); }
+[data-wire-theme="glass"] .wc-banner {
+    background: rgba(255,255,255,0.55); border-top: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 -8px 32px rgba(15,23,42,0.12);
+    backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+[data-wire-theme="glass"] .wc-banner-title { color: #0f172a; }
+[data-wire-theme="glass"] .wc-banner-description { color: rgba(15,23,42,0.7); }
+[data-wire-theme="glass"] .wc-banner-link { color: #0f172a; }
+[data-wire-theme="glass"] .wc-btn { border-radius: 10px; }
+[data-wire-theme="glass"] .wc-btn-primary { background: #0f172a; color: #ffffff; }
+[data-wire-theme="glass"] .wc-btn-secondary { background: rgba(255,255,255,0.5); color: #0f172a; border-color: rgba(255,255,255,0.6); }
+[data-wire-theme="glass"] .wc-btn-muted { background: rgba(15,23,42,0.08); color: #0f172a; }
+
+/* ===== neon: panel oscuro, glow cian, monospace ===== */
+[data-wire-theme="neon"] .wc-floating {
+    background: #0a0a12; color: #22d3ee; border: 1px solid #22d3ee; border-radius: 4px;
+    box-shadow: 0 0 20px rgba(34,211,238,0.5), inset 0 0 12px rgba(34,211,238,0.1);
+}
+[data-wire-theme="neon"] .wc-floating:hover { color: #67e8f9; border-color: #67e8f9; box-shadow: 0 0 28px rgba(34,211,238,0.7); }
+[data-wire-theme="neon"] .wc-banner { background: #0a0a12; border-top: 1px solid #22d3ee; box-shadow: 0 0 24px rgba(34,211,238,0.35); }
+[data-wire-theme="neon"] .wc-banner,
+[data-wire-theme="neon"] .wc-btn { font-family: ui-monospace, "JetBrains Mono", "Fira Code", monospace; letter-spacing: 0.3px; }
+[data-wire-theme="neon"] .wc-banner-title { color: #22d3ee; text-shadow: 0 0 8px rgba(34,211,238,0.6); }
+[data-wire-theme="neon"] .wc-banner-description { color: #7dd3fc; }
+[data-wire-theme="neon"] .wc-banner-link { color: #22d3ee; }
+[data-wire-theme="neon"] .wc-btn { border-radius: 4px; }
+[data-wire-theme="neon"] .wc-btn-primary { background: #22d3ee; color: #0a0a12; box-shadow: 0 0 14px rgba(34,211,238,0.6); }
+[data-wire-theme="neon"] .wc-btn-secondary { background: transparent; color: #22d3ee; border-color: #22d3ee; }
+[data-wire-theme="neon"] .wc-btn-muted { background: rgba(34,211,238,0.12); color: #22d3ee; }
+
+/* ===== synthwave: degradado púrpura, magenta, glow ===== */
+[data-wire-theme="synthwave"] .wc-floating {
+    background: linear-gradient(135deg, #1a0033, #2d0066); color: #ff00ff; border: 1px solid #ff00ff; border-radius: 0;
+    box-shadow: 0 0 20px rgba(255,0,255,0.5);
+}
+[data-wire-theme="synthwave"] .wc-floating:hover { color: #ffffff; border-color: #ffffff; }
+[data-wire-theme="synthwave"] .wc-banner { background: linear-gradient(135deg, #1a0033, #2d0066); border-top: 1px solid #ff00ff; box-shadow: 0 0 26px rgba(255,0,255,0.4); }
+[data-wire-theme="synthwave"] .wc-banner-title { color: #ff00ff; text-shadow: 0 0 8px rgba(255,0,255,0.6); }
+[data-wire-theme="synthwave"] .wc-banner-description { color: rgba(255,255,255,0.85); }
+[data-wire-theme="synthwave"] .wc-banner-link { color: #22d3ee; }
+[data-wire-theme="synthwave"] .wc-btn { border-radius: 0; }
+[data-wire-theme="synthwave"] .wc-btn-primary { background: linear-gradient(90deg, #ff00ff, #9d00ff); color: #ffffff; box-shadow: 0 0 16px rgba(255,0,255,0.5); }
+[data-wire-theme="synthwave"] .wc-btn-secondary { background: transparent; color: #ff00ff; border-color: #ff00ff; }
+[data-wire-theme="synthwave"] .wc-btn-muted { background: rgba(255,0,255,0.15); color: #ffffff; }
+
+/* ===== gradient: panel violeta degradado, texto blanco ===== */
+[data-wire-theme="gradient"] .wc-floating {
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #ffffff; border: 0; border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(139,92,246,0.4);
+}
+[data-wire-theme="gradient"] .wc-floating:hover { color: #ffffff; filter: brightness(1.05); }
+[data-wire-theme="gradient"] .wc-banner { background: linear-gradient(135deg, #8b5cf6, #6d28d9); border-top: 0; box-shadow: 0 -10px 30px rgba(139,92,246,0.35); }
+[data-wire-theme="gradient"] .wc-banner-title { color: #ffffff; }
+[data-wire-theme="gradient"] .wc-banner-description { color: rgba(255,255,255,0.85); }
+[data-wire-theme="gradient"] .wc-banner-link { color: #ffffff; }
+[data-wire-theme="gradient"] .wc-btn { border-radius: 12px; }
+[data-wire-theme="gradient"] .wc-btn-primary { background: #ffffff; color: #6d28d9; }
+[data-wire-theme="gradient"] .wc-btn-secondary { background: rgba(255,255,255,0.15); color: #ffffff; border-color: rgba(255,255,255,0.4); }
+[data-wire-theme="gradient"] .wc-btn-muted { background: rgba(255,255,255,0.2); color: #ffffff; }
+
+/* =========================================================
+   Categorías del modal — viven DENTRO de wiremodal, así que
+   siguen su tema vía --wire-* (esto NO es page-level).
+   ========================================================= */
+[data-wire-theme="brutalist"] .wc-category {
+    border: 2px solid var(--wire-text);
+    box-shadow: 4px 4px 0 0 var(--wire-text);
+}
+[data-wire-theme="neon"] .wc-category {
+    box-shadow:
+        0 0 20px color-mix(in srgb, var(--wire-accent) 50%, transparent),
+        inset 0 0 20px color-mix(in srgb, var(--wire-accent) 8%, transparent);
+    text-shadow: 0 0 6px color-mix(in srgb, var(--wire-accent) 50%, transparent);
+    font-family: ui-monospace, "JetBrains Mono", "Fira Code", monospace;
+}
+[data-wire-theme="claude"] .wc-category {
+    border-top: 2px solid var(--wire-accent);
+    letter-spacing: -0.005em;
 }
