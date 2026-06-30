@@ -144,6 +144,19 @@ All props are optional. Text props default to the translation; pass one to overr
 | `modal-title` | translation | Preferences modal title. |
 | `always-active` | translation | Badge on required (essential) categories. |
 
+## Sponsors
+
+Wirecookies is supported by the following sponsors. Thank you for keeping it growing:
+
+<p>
+  <a href="https://kenodo.com"><img src="art/logo-kenodo.png" width="24" alt="Kenodo"></a>&nbsp;<a href="https://kenodo.com">Kenodo</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://andorradev.com"><img src="art/logo-andorradev.png" width="24" alt="AndorraDev"></a>&nbsp;<a href="https://andorradev.com">AndorraDev</a>
+</p>
+
+## Author
+
+Created by [Edu Lazaro](https://edulazaro.com)
+
 ## License
 
-MIT © Edu Lazaro
+Wirecookies is open-sourced software licensed under the [MIT license](LICENSE.md).
